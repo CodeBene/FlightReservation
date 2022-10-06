@@ -38,4 +38,3 @@ public abstract class Passenger implements InternationalFlight, Comparable<Passe
     }
 
 }
-Footer

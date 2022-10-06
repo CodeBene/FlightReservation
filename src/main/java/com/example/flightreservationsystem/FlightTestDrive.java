@@ -1,29 +1,44 @@
 package com.example.flightreservationsystem;
 
 
-public class FlightTestDrive {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class FlightTestDrive extends Application {
+    Stage window;
+    Scene sceneClient, sceneAdmin;
     public static void main(String[] args) {
-        Flight flight1 = new Flight(4,"Paris", "Rome", "17:00", "21:00", 500);
-        Flight flight2 = new Flight(2, "Toronto", "Cancun", "9:00", "15", 600);
-        Flight flight3 = new Flight(3, "Madrid", "Kuala Lumpur", "16:00","01:00", 800);
-        EconomyPassenger passenger1 = new EconomyPassenger("Ramsay", "Gordon", "vegetarian");
-        EconomyPassenger passenger2 = new EconomyPassenger("Tremblay", "Richard", "standard");
-
-        //Flight fli1 = new Flight(4,"Paris", "Rome", "17:00", "21:00");
-
-        flight1.displayListOfEconomyPassengers();
-        flight1.addEconomyPassenger(passenger1);
-        flight1.addEconomyPassenger(passenger2);
-        FlightSchedule schedule = new FlightSchedule();
-        schedule.addFlightToSchedule(flight1);
-        schedule.addFlightToSchedule(flight2);
-        schedule.addFlightToSchedule(flight3);
-        passenger1.getPassportInfo("Italian", 200919);
-        //System.out.println("Number of seats still available : " + flight1.getNbOfSeatsAvailable());
-        schedule.sortFlights();
-        //System.out.println("Flight schedule\n" + "-------------------------\n" + schedule.getFlightList());
-        System.out.println(schedule);
-
-
+        launch(args);
     }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        window = stage;
+
+        Label flightNumberLabel = new Label("Flight no.1");
+        GridPane grid = new GridPane();
+        grid.add(flightNumberLabel,0,0);
+        Button adminButton = new Button("admin");
+        grid.add(adminButton, 1,1 );
+        sceneClient = new Scene(grid, 600, 200);
+
+        adminButton.setOnAction(event-> window.setScene(sceneAdmin));
+        //admin system
+        Button reservationButton = new Button("Reservation");
+        GridPane grid2 = new GridPane();
+        grid2.add(reservationButton, 1,1);
+        sceneAdmin = new Scene(grid2, 600,200);
+
+        window.setScene(sceneClient);
+        window.setTitle("Flight Reservation System");
+        window.show();
+    }
+
+
+
+
 }
